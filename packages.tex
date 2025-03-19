@@ -1,0 +1,186 @@
+%===============================================================================
+% LAYOUT
+%===============================================================================
+
+% DOCUMENT GEOMETRY:
+\usepackage{amssymb,amsmath,amsthm} 
+\usepackage{color} 
+\usepackage[top=1in, bottom=1in, left=1in, right=1in]{geometry}
+\linespread{2} % Increases vertical spacing
+
+%\setlength\parindent{0pt} % No indentation
+\setlength{\parskip}{0.35\baselineskip} % Vertical space between paragraphs
+%\addtolength{\footnotesep}{2mm} % change to 1mm
+
+\usepackage{graphicx,booktabs}
+%\usepackage[round]{natbib}
+%\usepackage{hyperref,float}
+%\usepackage[longnamesfirst]{natbib}
+%\usepackage{natbib,anysize}
+\usepackage{lscape}
+\usepackage{setspace}
+\usepackage{subcaption}
+\usepackage{stmaryrd}
+\usepackage{comment}
+\usepackage{mathrsfs}
+\usepackage{setspace}
+\usepackage{titlesec}
+\usepackage{longtable}
+\usepackage{tocloft}
+\usepackage[font=sc,labelsep=none]{caption}
+\usepackage{multirow}
+\usepackage{footmisc}
+\usepackage{arydshln}
+\usepackage{subfigure}
+
+% FONT:
+\usepackage[utf8]{inputenc}
+	% Encoding of input text
+\usepackage[T1]{fontenc}
+	% Encoding of fonts
+\usepackage{lmodern}
+	% Latin modern font - needed for fontenc
+\usepackage{crimson}
+\usepackage[kerning]{microtype}
+	% Better looking text
+\usepackage[english]{babel}
+	% Language control, for hyphenation etc
+
+% COLORS:
+\usepackage[dvipsnames]{xcolor}
+	% expanded colour palette
+\usepackage{tcolorbox}
+	% Introduces the \newcolorbox{}{} and \begin{tcolorbox} commands.
+\newtcolorbox{mybox}{colback=red!5!white,colframe=red!75!black}
+	% customise the text boxes
+
+% COMMENTS:
+% Make coloured comments in text like \comment{This is a coloured comment.}
+\renewcommand{\comment}[1]{{\bfseries \color{Green} #1}}
+% \newcommand{\comment}[1]{}  % Uncomment this line to  h i d e  all \comments{}
+
+% LINKS AND NAVIGATION:
+\usepackage{xr-hyper}
+\usepackage[hidelinks,colorlinks,urlcolor=NavyBlue,linkcolor=NavyBlue,citecolor=NavyBlue]{hyperref}
+
+\makeatletter
+\newcommand*{\addFileDependency}[1]{% argument=file name and extension
+  \typeout{(#1)}% latexmk will find this if $recorder=0 (however, in that case, it will ignore #1 if it is a .aux or .pdf file etc and it exists! if it doesn't exist, it will appear in the list of dependents regardless)
+  \@addtofilelist{#1}% if you want it to appear in \listfiles, not really necessary and latexmk doesn't use this
+  \IfFileExists{#1}{}{\typeout{No file #1.}}% latexmk will find this message if #1 doesn't exist (yet)
+}
+\makeatother
+
+\newcommand*{\myexternaldocument}[1]{%
+    \externaldocument{#1}%
+    \addFileDependency{#1.tex}%
+    \addFileDependency{#1.aux}%
+}
+
+\myexternaldocument{InternetAppendix}
+
+\usepackage{bookmark}
+	% pdf bookmarks
+
+% HEADER AND FOOTER:
+\usepackage{fancyhdr}
+\rhead{}
+\cfoot{\thepage}
+\pagestyle{plain} % "fancy" for line at page head
+\fancyhf{}
+
+% FIGURES AND TABLES:
+\usepackage[section]{placeins}
+	% Keep floats (figures, tables) within the section
+\usepackage{booktabs}
+	% Better looking tables, also see Fear (2005) for usage and style rules
+\usepackage{graphicx}
+\usepackage{float}
+	% For easier figure placement
+%\usepackage{subcaption}
+	% Package for several figures in one environment
+
+
+%===============================================================================
+% BIBLIOGRAPHY
+%===============================================================================
+
+%\usepackage[utf8]{inputenc}
+%\usepackage[english]{babel}
+\usepackage[authoryear]{natbib}
+
+
+% remove the number label before reference
+
+
+%===============================================================================
+% MATH TYPE SETTING OPTIONS
+%===============================================================================
+
+%\usepackage{amsmath,amssymb,amsfonts,mathrsfs,accents}
+\DeclareMathOperator*{\argmin}{argmin}
+\usepackage{bm}
+	% Bold and italic mathsymbols AND letters
+\usepackage{dsfont}
+	% nice indicator function with \mathds{1}
+
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}{Proposition}
+\newtheorem{claim}{Claim}
+\newtheorem{axiom}{Axiom}
+\newtheorem{condition}{Condition}
+\newtheorem{conjecture}{Conjecture}
+\newtheorem{corollary}{Corollary}
+\newtheorem{definition}{Definition}
+\newtheorem{assumption}{Assumption}
+\newtheorem{lemma}{Lemma}
+\newtheorem{property}{Property}
+\newtheorem{fact}{Fact}
+\newtheorem{example}{Example}
+\newtheorem{observation}{Observation}
+%===============================================================================
+% MISC PACKAGES
+%===============================================================================
+
+\usepackage{enumerate}
+	% package for making different lists
+\usepackage[babel]{csquotes}
+	% Better looking quotes
+\usepackage{nicefrac}
+\usepackage{capt-of}
+	% Allows caption for 'align' environment, i.g.
+\usepackage{indentfirst}
+
+\makeatletter
+\renewcommand\paragraph{\@startsection{paragraph}{4}{\z@}%
+                                      {\parskip}%{3.25ex \@plus1ex \@minus.2ex}%
+                                      {-1em}%
+                                      {\normalfont\normalsize\bfseries}}
+\makeatother
+ 
+%===============================================================================
+% MISC OPTIONS
+%===============================================================================
+
+\addto\captionsenglish{\renewcommand{\contentsname}{Overview}}
+	% Rename title of table of contents
+%\numberwithin{equation}{section}
+	% Uncomment this if you want to number equations by section
+%\renewcommand{\thesubsection}{\thesection.\alph{subsection}}
+	% Uncomment this if you want subsection in letters
+
+\newif\ifdraft % to declare sections of the documents to hide conditional on
+	% being in draft mode
+
+% ROMAN NUMBERS FOR QJE
+\renewcommand{\thetable}{\arabic{table}}
+\renewcommand{\thefigure}{\arabic{figure}}
+
+\renewcommand{\thesection}{\arabic{section}} 
+\renewcommand{\thesubsection}{\arabic{section}.\arabic{subsection}}
+
+\makeatletter
+\newcommand*\ExpandableInput[1]{\@@input#1 }
+\makeatother
+\newcommand{\sym}[1]{\rlap{#1}}% Thanks to David Carlisle
